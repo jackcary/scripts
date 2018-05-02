@@ -60,8 +60,8 @@ git push
 cd $SURGE_SH_REPO
 hugo -b $SURGE_SH_BASE_URL -s $DOT_COM_REPO -d $SURGE_SH_REPO --cleanDestinationDir
 
-#Find/replace GA tracking id for surge.io
+#Find/replace GA tracking id for surge.sh
 find $SURGE_SH_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-105680531-5/g' {} \;
 
-#Run surge command
+#Execute surge command
 surge $SURGE_SH_REPO/ $SURGE_SH_BASE_URL
