@@ -4,11 +4,13 @@
 DOT_COM_BASE_URL="https://jackcary.com/"
 BITBUCKET_IO_BASE_URL="https://jackcary.bitbucket.io/"
 GITHUB_IO_BASE_URL="https://jackcary.github.io/"
+GITLAB_IO_BASE_URL="https://jackcary.gitlab.io/"
 
 #Repo directories
 DOT_COM_REPO=$HOME/jackcary.com
 BITBUCKET_IO_REPO=$HOME/jackcary.bitbucket.io
 GITHUB_IO_REPO=$HOME/jackcary.github.io
+GITLAB_IO_REPO=$HOME/jackcary.gitlab.io
 
 #Clean up dot com destination
 #rm -rf $DOT_COM_REPO/public
@@ -36,6 +38,18 @@ hugo -b $GITHUB_IO_BASE_URL -s $DOT_COM_REPO -d $GITHUB_IO_REPO --cleanDestinati
 find $GITHUB_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-105680531-3/g' {} \;
 
 #Stage files, commit, and push to github.io
+git add .
+git commit -m "Deploy website"
+git push
+
+#Build gitlab.io site
+cd $GITLAB_IO_REPO
+hugo -b $GITLAB_IO_BASE_URL -s $DOT_COM_REPO -d $GITLAB_IO_REPO --cleanDestinationDir
+
+#Find/replace GA tracking id for gitlab.io
+find $GITLAB_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-105680531-4/g' {} \;
+
+#Stage files, commit, and push to gitlab.io
 git add .
 git commit -m "Deploy website"
 git push
