@@ -5,12 +5,14 @@ DOT_COM_BASE_URL="https://jackcary.com/"
 BITBUCKET_IO_BASE_URL="https://jackcary.bitbucket.io/"
 GITHUB_IO_BASE_URL="https://jackcary.github.io/"
 GITLAB_IO_BASE_URL="https://jackcary.gitlab.io/"
+SURGE_SH_BASE_URL="https://jackcary.surge.sh/"
 
 #Repo directories
 DOT_COM_REPO=$HOME/jackcary.com
 BITBUCKET_IO_REPO=$HOME/jackcary.bitbucket.io
 GITHUB_IO_REPO=$HOME/jackcary.github.io
 GITLAB_IO_REPO=$HOME/jackcary.gitlab.io
+SURGE_SH_REPO=$HOME/jackcary.surge.sh
 
 #Clean up dot com destination
 #rm -rf $DOT_COM_REPO/public
@@ -53,3 +55,13 @@ find $GITLAB_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-10
 git add .
 git commit -m "Deploy website"
 git push
+
+#Build surge.sh site
+cd $SURGE_SH_REPO
+hugo -b $SURGE_SH_BASE_URL -s $DOT_COM_REPO -d $SURGE_SH_REPO --cleanDestinationDir
+
+#Find/replace GA tracking id for surge.io
+find $SURGE_SH_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-105680531-5/g' {} \;
+
+#Run surge command
+surge $SURGE_SH_REPO/ $SURGE_SH_BASE_URL
