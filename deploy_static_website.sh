@@ -29,7 +29,7 @@ find $BITBUCKET_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA
 
 #Stage files, commit, and push to bitbucket.io
 git add .
-git commit -m "Deploy website"
+git commit -m "Automated commit and website deployment"
 git push
 
 #Build github.io site
@@ -41,7 +41,7 @@ find $GITHUB_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-10
 
 #Stage files, commit, and push to github.io
 git add .
-git commit -m "Deploy website"
+git commit -m "Automated commit and website deployment"
 git push
 
 #Build gitlab.io site
@@ -53,7 +53,7 @@ find $GITLAB_IO_REPO/. -name '*.html' -exec sed -i '' -e 's/UA-105680531-1/UA-10
 
 #Stage files, commit, and push to gitlab.io
 git add .
-git commit -m "Deploy website"
+git commit -m "Automated commit and website deployment"
 git push
 
 #Build surge.sh site
